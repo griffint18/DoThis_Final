@@ -1,5 +1,6 @@
 package com.example.thomas.dothis;
-
+// https://www.youtube.com/watch?v=3QHgJnPPnqQ
+// 18:21
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
