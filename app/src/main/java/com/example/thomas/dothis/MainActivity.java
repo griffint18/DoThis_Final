@@ -1,6 +1,6 @@
 package com.example.thomas.dothis;
 // https://www.youtube.com/watch?v=3QHgJnPPnqQ
-// 18:21
+// 33:31
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     String messageText;
+    int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(Intent_Constants.INTENT_MESSAGE_DATA, arrayList.get(position).toString());
                 intent.putExtra(Intent_Constants.INTENT_ITEM_POSITION, position);
                 startActivityForResult(intent, Intent_Constants.INTENT_REQUEST_CODE_TWO);
-                a
             }
         });
     }
@@ -50,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == Intent_Constants.INTENT_REQUEST_CODE) {
             messageText = data.getStringExtra(Intent_Constants.INTENT_MESSAGE_FIELD);
             arrayList.add(messageText);
+            arrayAdapter.notifyDataSetChanged();
+        }
+        else if (resultCode == Intent_Constants.INTENT_REQUEST_CODE_TWO){
+            messageText = data.getStringExtra(Intent_Constants.INTENT_CHANGED_MESSAGE);
+            position = data.getIntExtra(Intent_Constants.INTENT_ITEM_POSITION, -1);
+            arrayList.remove(position);
+            arrayList.add(position, messageText);
             arrayAdapter.notifyDataSetChanged();
         }
     }
