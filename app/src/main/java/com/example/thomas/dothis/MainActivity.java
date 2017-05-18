@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(Intent_Constants.INTENT_MESSAGE_DATA, arrayList.get(position).toString());
                 intent.putExtra(Intent_Constants.INTENT_ITEM_POSITION, position);
                 startActivityForResult(intent, Intent_Constants.INTENT_REQUEST_CODE_TWO);
+                a
             }
         });
     }
