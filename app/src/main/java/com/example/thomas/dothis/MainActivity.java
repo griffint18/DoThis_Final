@@ -1,6 +1,7 @@
 package com.example.thomas.dothis;
-// https://www.youtube.com/watch?v=3QHgJnPPnqQ
-// 33:31
+// https://www.youtube.com/watch?v=duHKgfl21BU
+// 4:11
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
     ListView listView;
@@ -37,8 +41,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, Intent_Constants.INTENT_REQUEST_CODE_TWO);
             }
         });
+        try {
+            Scanner sca = new Scanner(openFileInput("Todo.txt"));
+            while (sca.hasNextLine()) {
+                String data = sca.nextLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-
+    @Override
+    public void onBackPressed() {
+        try {
+            PrintWriter pw = new PrintWriter(openFileOutput("Todo.txt", Context.MODE_PRIVATE));
+            for(String data : arrayList) {
+                pw.println(data);
+            }
+            pw.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     public void onClick(View v) {
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, EditFieldClass.class);
