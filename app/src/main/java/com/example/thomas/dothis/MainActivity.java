@@ -43,9 +43,11 @@ public class MainActivity extends AppCompatActivity {
         });
         try {
             Scanner sca = new Scanner(openFileInput("Todo.txt"));
-            while (sca.hasNextLine()) {
+            while(sca.hasNextLine()) {
                 String data = sca.nextLine();
+                arrayAdapter.add(data);
             }
+            sca.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -61,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        finish();
     }
+
     public void onClick(View v) {
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, EditFieldClass.class);
